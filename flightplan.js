@@ -41,8 +41,6 @@ plan.remote(function(remote) {
     remote.log('Reload application');
     remote.sudo('ln -snf ~/' + tmpDir + ' ~/' + appName, { user: username });
 
-    remote.log('Build js files');
-    remote.sudo('cd ~/' + tmpDir + ' && yarn build && mkdir upload', { user: username });
     // remote.log('Cleaning up old deploys...');
     // remote.sudo('rm -rf `ls -1dt ~/' + appName + '-* | tail -n 1`', { user: username });
     remote.log('PM2 stop all app');
