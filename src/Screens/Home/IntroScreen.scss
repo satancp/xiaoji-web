@@ -1,0 +1,146 @@
+@import "../../assets/color.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 144px 0 0;
+  .wrapper1 {
+    height: 580px;
+  }
+  .wrapper2 {
+    height: 600px;
+    margin-top: 80px;
+  }
+  .subTitle {
+    font-size: 24px;
+    color: $black;
+    font-weight: 400;
+    text-align: center;
+  }
+  .introItemWrapper {
+    display: flex;
+    width: 1200px;
+    height: 400px;
+    margin-top: 80px;
+  }
+  .introItem {
+    position: relative;
+    width: 400px;
+    box-sizing: border-box;
+    &.left {
+      padding-left: 0;
+    }
+    &.center {
+      padding-left: 150px;
+    }
+    &.right {
+      padding-left: 300px;
+    }
+    .watermark {
+      font-size: 170px;
+      color: #eff3f6;
+      letter-spacing: 0;
+      font-weight: bold;
+      position: absolute;
+      z-index: -1;
+      top: 30px;
+    }
+    .image {
+      width: 156px;
+      height: 156px;
+      transform: translate(-30px, -30px);
+    }
+    .textWrapper {
+      h2 {
+        font-size: 32px;
+        color: $black;
+        font-weight: 400;
+        margin-top: 0;
+        margin-bottom: 16px;
+      }
+      h3 {
+        font-size: 20px;
+        color: $blue;
+        margin-top: 0;
+      }
+      .divider {
+        width: 42px;
+        height: 2px;
+        background-color: $divider;
+      }
+      p {
+        margin-top: 35px;
+        color: $grey;
+        font-size: 20px;
+      }
+    }
+  }
+  .mainTitleDesc {
+    font-size: 32px;
+    color: $black;
+    margin-top: 0;
+    margin-bottom: 56px;
+    font-weight: 400;
+    text-align: center;
+  }
+  .mainTitle {
+    color: $blue;
+    font-size: 38px;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 60px;
+    text-align: center;
+  }
+  .pinjianWrapper {
+    width: 1200px;
+    height: 195px;
+    display: flex;
+    background-color: #f7f8f9;
+  }
+  .pinjianItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 195px;
+    .pinjianTitle {
+      display: flex;
+      align-items: flex-end;
+    }
+    h3 {
+      font-size: 70px;
+      color: $blue;
+      font-weight: bold;
+      margin: 0;
+    }
+    .sub {
+      font-size: 20px;
+      color: $grey;
+      letter-spacing: 1.56px;
+      margin: 0 0 8px 12px;
+    }
+    .desc {
+      font-size: 20px;
+      letter-spacing: 1.25px;
+    }
+  }
+  .pinjian {
+    font-size: 32px;
+    font-weight: 400;
+    color: $black;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 32px;
+    a {
+      color: $blue;
+    }
+  }
+  .pinjianSub {
+    color: $grey;
+    font-size: 28px;
+    font-weight: 400;
+    text-align: center;
+  }
+}

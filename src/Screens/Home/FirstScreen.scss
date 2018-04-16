@@ -1,0 +1,79 @@
+@import "../../assets/color.scss";
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  position: relative;
+  background-position: 50% 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .wrapper {
+    width: 550px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .title {
+    color: $blue;
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: 2.22px;
+    margin-top: 40px;
+    margin-bottom: 50px;
+  }
+  .logo {
+    width: 156px;
+    height: 98px;
+  }
+  .center {
+    width: 480px;
+    height: 76px;
+    display: flex;
+    > div {
+      width: 120px;
+      display: flex;
+      justify-content: center;
+      &:after {
+        position: absolute;
+        top: 60%;
+        right: -9px;
+        transform: translate(0, -50%);
+        content: "";
+        display: block;
+        width: 20px;
+        height: 1px;
+        background-color: $blue;
+      }
+      &:last-child {
+        margin-right: 0;
+        &:after {
+          display: none;
+        }
+      }
+    }
+    .border {
+      width: 90px;
+      height: 90px;
+      border: 1px solid $blue;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      position: relative;
+      padding: 10px;
+      box-sizing: border-box;
+      > span {
+        color: $blue;
+        font-size: 14px;
+      }
+    }
+  }
+  .downloadButtons {
+    margin-top: 64px;
+  }
+}

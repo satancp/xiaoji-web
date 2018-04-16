@@ -1,0 +1,11 @@
+.container {
+  word-wrap: break-word;
+  color: #555;
+  padding: 50px 20%;
+  line-height: 23px;
+  font-size: 14px;
+  text-align: justify; }
+  @media (max-width: 960px) {
+    .container {
+      padding-left: 20px;
+      padding-right: 20px; } }

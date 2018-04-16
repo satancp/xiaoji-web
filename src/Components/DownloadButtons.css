@@ -1,0 +1,19 @@
+.downloadWrapper {
+  display: flex;
+  position: relative; }
+  .downloadWrapper img {
+    width: 275px;
+    height: 118px;
+    cursor: pointer; }
+    .downloadWrapper img.iPhoneQRCode {
+      position: absolute;
+      top: -260px;
+      left: 20px;
+      width: 241px;
+      height: 241px; }
+    .downloadWrapper img.androidQRCode {
+      position: absolute;
+      top: -260px;
+      left: 290px;
+      width: 241px;
+      height: 241px; }

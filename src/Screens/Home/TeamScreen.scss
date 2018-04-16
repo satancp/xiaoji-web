@@ -1,0 +1,214 @@
+@import "../../assets/color.scss";
+
+.container {
+  padding: 144px 0 0;
+  .wrapper1 {
+    height: 600px;
+  }
+  .wrapper2 {
+    height: 900px;
+    align-items: center;
+  }
+  .wrapper3 {
+    height: 800px;
+    display: flex;
+    justify-content: center;
+  }
+  .desc {
+    text-align: center;
+    font-size: 28px;
+    color: $black;
+    margin-top: 46px;
+  }
+  .subTitle {
+    text-align: center;
+    font-weight: 400;
+    font-size: 32px;
+    color: $blue;
+    margin-top: 32px;
+  }
+  .categoryWrapper {
+    width: 878px;
+    height: 220px;
+    margin: 0 auto;
+    display: flex;
+  }
+  .categoryItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 155px;
+    margin-top: 80px;
+    margin-right: 86px;
+    position: relative;
+    &:last-child {
+      margin-right: 0;
+    }
+    img {
+      width: 100px;
+      height: 100px;
+    }
+    .bottom {
+      width: 155px;
+      height: 46px;
+      background-color: #f7f8f9;
+      position: absolute;
+      z-index: -1;
+      bottom: 30px;
+    }
+    p {
+      font-size: 20px;
+      color: $black;
+      margin: 10px 0 0;
+    }
+  }
+  .brandTitle {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 400;
+    margin-top: 100px;
+  }
+  .brandWrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 200px);
+    grid-gap: 60px;
+    justify-content: center;
+    margin-top: 80px;
+    height: 600px;
+  }
+  .brandItem {
+    position: relative;
+    img {
+      width: 218px;
+      height: 218px;
+    }
+    .english {
+      position: absolute;
+      bottom: 12px;
+      font-size: 28px;
+      color: $black;
+      margin: 0 0 16px 0;
+    }
+    .name {
+      position: absolute;
+      bottom: 0;
+      font-size: 16px;
+      color: $grey;
+      margin: 0;
+    }
+  }
+  .moreWrapper {
+    width: 1200px;
+    height: 60px;
+    background-color: #f7f8f9;
+    margin: 100px auto 0;
+    position: relative;
+    .watermark {
+      font-size: 64px;
+      position: absolute;
+      color: $divider;
+      top: -50px;
+      left: 50%;
+      transform: translate(-50%, 0);
+      margin: 0;
+    }
+    .banner {
+      font-size: 20px;
+      color: $black;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+    img {
+      width: 584px;
+      height: 103px;
+      display: block;
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+  }
+  .serviceWrapper {
+    display: flex;
+    width: 1200px;
+    height: auto;
+    margin-top: 80px;
+    margin-bottom: 100px;
+  }
+  .serviceItem {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    box-sizing: border-box;
+    img {
+      width: 80px;
+      height: 80px;
+    }
+    .divider {
+      width: 36px;
+      height: 2px;
+      flex-shrink: 0;
+      margin-left: 0px;
+      margin-top: 16px;
+      background-color: $blue;
+    }
+    p {
+      margin-left: 0;
+      margin-top: 12px;
+      margin-bottom: 0;
+      font-size: 18px;
+    }
+  }
+  .serviceSub {
+    font-size: 28px;
+    color: $black;
+    text-align: center;
+  }
+  .serviceTitle {
+    color: $blue;
+    font-size: 32px;
+    text-align: center;
+    font-weight: 400;
+  }
+  .contact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .contactTitle {
+      display: flex;
+      align-items: center;
+      h3 {
+        color: $blue;
+        font-size: 32px;
+        margin-right: 20px;
+        font-weight: 400;
+      }
+      .pointer {
+        display: flex;
+        align-items: center;
+        div:first-child {
+          width: 64px;
+          height: 1px;
+          background-color: $blue;
+        }
+        div:last-child {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background-color: $blue;
+          margin-left: 4px;
+        }
+      }
+    }
+    img {
+      width: 513px;
+      height: 276px;
+    }
+    p {
+      color: $grey;
+      font-size: 24px;
+    }
+  }
+}

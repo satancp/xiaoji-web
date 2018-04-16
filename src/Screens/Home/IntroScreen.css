@@ -1,0 +1,116 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 144px 0 0; }
+  .container .wrapper1 {
+    height: 580px; }
+  .container .wrapper2 {
+    height: 600px;
+    margin-top: 80px; }
+  .container .subTitle {
+    font-size: 24px;
+    color: #1b1e27;
+    font-weight: 400;
+    text-align: center; }
+  .container .introItemWrapper {
+    display: flex;
+    width: 1200px;
+    height: 400px;
+    margin-top: 80px; }
+  .container .introItem {
+    position: relative;
+    width: 400px;
+    box-sizing: border-box; }
+    .container .introItem.left {
+      padding-left: 0; }
+    .container .introItem.center {
+      padding-left: 150px; }
+    .container .introItem.right {
+      padding-left: 300px; }
+    .container .introItem .watermark {
+      font-size: 170px;
+      color: #eff3f6;
+      letter-spacing: 0;
+      font-weight: bold;
+      position: absolute;
+      z-index: -1;
+      top: 30px; }
+    .container .introItem .image {
+      width: 156px;
+      height: 156px;
+      transform: translate(-30px, -30px); }
+    .container .introItem .textWrapper h2 {
+      font-size: 32px;
+      color: #1b1e27;
+      font-weight: 400;
+      margin-top: 0;
+      margin-bottom: 16px; }
+    .container .introItem .textWrapper h3 {
+      font-size: 20px;
+      color: #43aaed;
+      margin-top: 0; }
+    .container .introItem .textWrapper .divider {
+      width: 42px;
+      height: 2px;
+      background-color: #e1e1e1; }
+    .container .introItem .textWrapper p {
+      margin-top: 35px;
+      color: #6b707c;
+      font-size: 20px; }
+  .container .mainTitleDesc {
+    font-size: 32px;
+    color: #1b1e27;
+    margin-top: 0;
+    margin-bottom: 56px;
+    font-weight: 400;
+    text-align: center; }
+  .container .mainTitle {
+    color: #43aaed;
+    font-size: 38px;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 60px;
+    text-align: center; }
+  .container .pinjianWrapper {
+    width: 1200px;
+    height: 195px;
+    display: flex;
+    background-color: #f7f8f9; }
+  .container .pinjianItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 195px; }
+    .container .pinjianItem .pinjianTitle {
+      display: flex;
+      align-items: flex-end; }
+    .container .pinjianItem h3 {
+      font-size: 70px;
+      color: #43aaed;
+      font-weight: bold;
+      margin: 0; }
+    .container .pinjianItem .sub {
+      font-size: 20px;
+      color: #6b707c;
+      letter-spacing: 1.56px;
+      margin: 0 0 8px 12px; }
+    .container .pinjianItem .desc {
+      font-size: 20px;
+      letter-spacing: 1.25px; }
+  .container .pinjian {
+    font-size: 32px;
+    font-weight: 400;
+    color: #1b1e27;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 32px; }
+    .container .pinjian a {
+      color: #43aaed; }
+  .container .pinjianSub {
+    color: #6b707c;
+    font-size: 28px;
+    font-weight: 400;
+    text-align: center; }

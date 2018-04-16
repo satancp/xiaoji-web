@@ -1,0 +1,69 @@
+@import "../../assets/color.scss";
+
+.container {
+  .titleImage {
+    width: 100%;
+    height: 288px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    h1 {
+      color: $blue;
+      font-size: 38px;
+      letter-spacing: 2.5px;
+      margin: 0;
+      font-weight: 400;
+    }
+  }
+  .problemWrapper {
+    padding: 48px 20px;
+    box-shadow: 0 8px 20px 0 rgba(221, 221, 221, 0.5);
+    p {
+      margin: 0 0 40px 0;
+      color: $grey;
+      font-size: 18px;
+    }
+    .problems {
+      display: flex;
+    }
+    .problem {
+      width: 25%;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      h3 {
+        color: $blue;
+        font-size: 40px;
+        letter-spacing: 3px;
+        margin: 0 30px 0 0;
+        position: relative;
+        text-align: right;
+        width: 50px;
+        &:after {
+          content: "";
+          width: 1px;
+          height: 30px;
+          display: block;
+          background-color: $blue;
+          position: absolute;
+          right: -14px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+      p {
+        font-weight: 200;
+        font-size: 16px;
+        line-height: 30px;
+        margin: 0;
+        color: $black;
+      }
+    }
+  }
+}

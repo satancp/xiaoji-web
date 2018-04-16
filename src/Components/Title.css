@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 500px;
+  margin: 0 auto 30px; }
+  .container h1 {
+    color: #43aaed;
+    font-size: 38px;
+    font-weight: normal;
+    margin: 0; }
+  .container .left,
+  .container .right {
+    width: 14px;
+    height: 10px;
+    transform: skewY(-20deg) rotate(-40deg);
+    border-top: 3px solid #43aaed;
+    border-bottom: 3px solid #ffae62;
+    position: absolute; }
+  .container .left {
+    top: 16px;
+    left: 0; }
+  .container .right {
+    top: 20px;
+    right: 0; }

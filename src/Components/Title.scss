@@ -1,0 +1,34 @@
+@import "../assets/color.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 500px;
+  margin: 0 auto 30px;
+  h1 {
+    color: $blue;
+    font-size: 38px;
+    font-weight: normal;
+    margin: 0;
+  }
+  .left,
+  .right {
+    width: 14px;
+    height: 10px;
+    transform: skewY(-20deg) rotate(-40deg);
+    border-top: 3px solid $blue;
+    border-bottom: 3px solid $yellow;
+    position: absolute;
+  }
+  .left {
+    top: 16px;
+    left: 0;
+  }
+  .right {
+    top: 20px;
+    right: 0;
+  }
+}

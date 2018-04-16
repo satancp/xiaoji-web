@@ -1,0 +1,13 @@
+@import "../assets/color.scss";
+
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: $grey;
+  line-height: 21px;
+  margin-bottom: 40px;
+  a {
+    text-decoration: none;
+    color: $grey;
+  }
+}

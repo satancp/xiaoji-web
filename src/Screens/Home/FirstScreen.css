@@ -1,0 +1,65 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  position: relative;
+  background-position: 50% 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+  .container .wrapper {
+    width: 550px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+  .container .title {
+    color: #43aaed;
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: 2.22px;
+    margin-top: 40px;
+    margin-bottom: 50px; }
+  .container .logo {
+    width: 156px;
+    height: 98px; }
+  .container .center {
+    width: 480px;
+    height: 76px;
+    display: flex; }
+    .container .center > div {
+      width: 120px;
+      display: flex;
+      justify-content: center; }
+      .container .center > div:after {
+        position: absolute;
+        top: 60%;
+        right: -9px;
+        transform: translate(0, -50%);
+        content: "";
+        display: block;
+        width: 20px;
+        height: 1px;
+        background-color: #43aaed; }
+      .container .center > div:last-child {
+        margin-right: 0; }
+        .container .center > div:last-child:after {
+          display: none; }
+    .container .center .border {
+      width: 90px;
+      height: 90px;
+      border: 1px solid #43aaed;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      position: relative;
+      padding: 10px;
+      box-sizing: border-box; }
+      .container .center .border > span {
+        color: #43aaed;
+        font-size: 14px; }
+  .container .downloadButtons {
+    margin-top: 64px; }
