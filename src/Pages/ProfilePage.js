@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import FirstScreen from '~/Screens/Home/FirstScreen';
-import IntroScreen from '~/Screens/Home/IntroScreen';
-import FeatureScreen from '~/Screens/Home/FeatureScreen';
-import TeamScreen from '~/Screens/Home/TeamScreen';
-import Header from '~/Components/Header';
+import UserProfileScreen from '~/Screens/Profile/UserProfileScreen';
+import UserResourceScreen from '~/Screens/Profile/UserResourceScreen';
+import SimpleHeader from '~/Components/SimpleHeader';
 import Particle from '~/Components/Particle';
 import Cookies from 'universal-cookie';
+import { Footer } from '../Components/Footer';
 
 const cookies = new Cookies();
 
-export default class HomePage extends Component {
+export default class ProfilePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -38,12 +37,11 @@ export default class HomePage extends Component {
     render() {
         return (
             <div>
-                <Header homepage={this} />
+                <SimpleHeader />
                 <Particle />
-                <FirstScreen />
-                <IntroScreen />
-                {this.state.canDisplay ? <FeatureScreen /> : null}
-                <TeamScreen />
+                <UserProfileScreen />
+                <UserResourceScreen />
+                <Footer />
             </div>
         );
     }

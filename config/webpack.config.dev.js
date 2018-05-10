@@ -1,5 +1,3 @@
-
-
 const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
@@ -202,7 +200,10 @@ module.exports = {
                                 }
                             },
                             {
-                                loader: 'less-loader'
+                                loader: 'less-loader',
+                                options: {
+                                    javascriptEnabled: true
+                                }
                             }
                         ]
                     },
@@ -217,7 +218,10 @@ module.exports = {
                                 loader: 'css-loader'
                             },
                             {
-                                loader: 'less-loader'
+                                loader: 'less-loader',
+                                options: {
+                                    javascriptEnabled: true
+                                }
                             }
                         ]
                     },

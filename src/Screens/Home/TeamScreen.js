@@ -5,7 +5,6 @@ import { Footer } from '~/Components/Footer';
 import ScrollAnim from 'rc-scroll-anim';
 import QueueAnim from 'rc-queue-anim';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import configs from '../../config';
 
 const OverPack = ScrollAnim.OverPack;
@@ -34,6 +33,7 @@ export default class TeamScreen extends Component {
 
     componentWillMount() {
         axios.get(`${configs.server_url}category/list`).then(response => {
+            if (response.data.code === 0) response = response.data;
             let temp = [];
             for (let i = 0; i < response.data.length; i++) {
                 temp.push({

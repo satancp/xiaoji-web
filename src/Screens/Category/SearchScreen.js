@@ -49,6 +49,7 @@ export default class SearchScreen extends Component {
 
     componentWillMount() {
         axios.get(`${configs.server_url}category/list`).then(response => {
+            if (response.data.code === 0) response = response.data;
             let temp = [];
             for (let i = 0; i < response.data.length; i++) {
                 if (response.data[i].id === this.state.category_id) {
@@ -62,7 +63,8 @@ export default class SearchScreen extends Component {
             }
             this.setState({ SERVICE_ITEMS: temp });
         });
-        axios.get(`${configs.server_url}resource/getResources?category_id=${this.state.category_id}`).then(response => {
+        axios.get(`${configs.server_url}resource/get_resources?category_id=${this.state.category_id}`).then(response => {
+            if (response.data.code === 0) response = response.data;
             let temp = [];
             for (let i = 0; i < response.data.length; i++) {
                 temp.push({

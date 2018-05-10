@@ -42,6 +42,7 @@ export default class FeatureScreen extends Component {
 
     componentWillMount() {
         axios.get(`${configs.server_url}category/list`).then(response => {
+            if (response.data.code === 0) response = response.data;
             let temp = [];
             for (let i = 0; i < response.data.length; i++) {
                 if (i > 3) break;
@@ -50,6 +51,7 @@ export default class FeatureScreen extends Component {
             this.setState({ CATEGORY_ITEMS: temp });
         });
         axios.get(`${configs.server_url}resource/list`).then(response => {
+            if (response.data.code === 0) response = response.data;
             let temp = [];
             for (let i = 0; i < response.data.length; i++) {
                 if (i > 7) break;

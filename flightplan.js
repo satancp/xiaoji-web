@@ -46,7 +46,7 @@ plan.remote(function(remote) {
     remote.log('PM2 stop all app');
     remote.exec('pm2 stop all');
     remote.log('PM2 start app ~/' + appName + '/' + startFile);
-    remote.exec('cd ~/' + appName + ' pm2 start ' + startFile);
+    remote.exec('cd ~/' + appName + ' && pm2 start ' + startFile);
     remote.log('PM2 list all');
     remote.exec('pm2 ls');
     remote.exec('pm2 show ' + appName);

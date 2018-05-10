@@ -15,11 +15,7 @@ const cookies = new Cookies();
 const LinkS = ScrollAnim.Link;
 
 class HeaderVM {
-    navs = [
-        { label: 'Home', anchor: 'home' },
-        { label: 'Categories', anchor: 'categories' },
-        { label: 'Resources', anchor: 'resources' }
-    ];
+    navs = [{ label: 'Home', anchor: 'home' }];
     @observable scrollY = false;
 
     @action
@@ -29,7 +25,7 @@ class HeaderVM {
 }
 
 @observer
-export default class CategoryHeader extends Component {
+export default class ResourceHeader extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -77,6 +73,7 @@ export default class CategoryHeader extends Component {
     handleCancel = () => {
         this.setState({ visible: false });
     };
+
     componentWillMount() {
         this.vm = new HeaderVM();
     }
@@ -119,19 +116,11 @@ export default class CategoryHeader extends Component {
                     </a>
                     <div key="nav" className={styles.nav}>
                         {vm.navs.map((item, k) => {
-                            if (item.anchor === 'home') {
-                                return (
-                                    <Link className={styles.link} key={k} to="/">
-                                        {item.label}
-                                    </Link>
-                                );
-                            } else {
-                                return (
-                                    <LinkS className={styles.link} key={k} to={item.anchor}>
-                                        {item.label}
-                                    </LinkS>
-                                );
-                            }
+                            return (
+                                <Link className={styles.link} key={k} to="/">
+                                    {item.label}
+                                </Link>
+                            );
                         })}
                         {this.state.hasLogin ? (
                             <Dropdown overlay={menu} key="profiledrop">

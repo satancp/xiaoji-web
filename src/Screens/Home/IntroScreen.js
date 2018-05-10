@@ -4,7 +4,6 @@ import { Title } from '~/Components/Title';
 import { Image } from '~/Components/UIKit';
 import ScrollAnim from 'rc-scroll-anim';
 import QueueAnim from 'rc-queue-anim';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import axios from 'axios';
 import configs from '../../config';
@@ -66,7 +65,8 @@ export default class IntroScreen extends Component {
     }
 
     componentWillMount() {
-        axios.get(`${configs.server_url}star/list`).then(response => {
+        axios.get(`${configs.server_url}home/list_star`).then(response => {
+            if (response.data.code === 0) response = response.data;
             for (let i = 0; i < response.data.length; i++) {
                 if (i <= 2) {
                     this.INTRO_ITEMS[i].title = response.data[i].name;

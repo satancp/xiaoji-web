@@ -7,6 +7,8 @@ import './App.css';
 import HomePage from './Pages/HomePage';
 import CategorySearchPage from './Pages/CategorySearchPage';
 import ResourceContentPage from './Pages/ResourceContentPage';
+import ResourceAddPage from './Pages/ResourceAddPage';
+import ProfilePage from './Pages/ProfilePage';
 
 export const history = createBrowserHistory();
 
@@ -27,6 +29,8 @@ export default class App extends Component {
                     <Route path="/" exact component={HomePage} />
                     <Route path="/category/:category_id/" component={CategorySearchPage} />
                     <Route path="/resource/:resource_id/:category_id/" component={ResourceContentPage} />
+                    <Route path="/resource/add/" component={ResourceAddPage} />
+                    <Route path="/user/:user_id/" component={ProfilePage} />
                     <Route path="/service" exact component={AsyncService} />
                     <Route path="/pinjian" exact component={AsyncPinjian} />
                 </Switch>

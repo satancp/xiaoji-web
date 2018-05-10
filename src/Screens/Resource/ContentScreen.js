@@ -34,7 +34,7 @@ export default class ContentScreen extends Component {
             loading: true,
             commentLoading: false,
             commentLoadingMore: false,
-            showLoadingMoreComments: true
+            showLoadingMoreComments: false
         };
         this.htmlToReactParser = new HtmlToReactParser();
         this.convertStyle = time => {};
@@ -60,8 +60,9 @@ export default class ContentScreen extends Component {
     }
 
     componentWillMount() {
-        axios.get(`${configs.server_url}resource/getResource?resource_id=${this.state.resource_id}`).then(response => {
+        axios.get(`${configs.server_url}resource/get_resource?resource_id=${this.state.resource_id}`).then(response => {
             console.log(response.data);
+            if (response.data.code === 0) response = response.data;
             this.props.onGetData(response.data.category);
             let temp = [];
             for (let i = 0; i < response.data.tags.length; i++) {
@@ -85,12 +86,13 @@ export default class ContentScreen extends Component {
             response.data.adjustedTags = temp;
             axios
                 .get(
-                    `${configs.server_url}resource/getResources?category_id=
+                    `${configs.server_url}resource/get_resources?category_id=
                     ${this.state.category_id}
                     &resource_id=
                     ${this.state.resource_id}`
                 )
                 .then(response1 => {
+                    if (response1.data.code === 0) response1 = response1.data;
                     this.setState({
                         currentResource: response.data,
                         loading: false,
