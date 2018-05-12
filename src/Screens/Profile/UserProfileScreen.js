@@ -28,35 +28,44 @@ export default class UserProfileScreen extends Component {
             window.location = '/';
         }
         const current = moment();
-        if (current.hour() < 9) {
+        const currentHour = current
+            .hour()
+            .toString()
+            .padStart(2, '0');
+        const currentMinute = current
+            .minute()
+            .toString()
+            .padStart(2, '0');
+        const currentTime = moment(`${currentHour}:${currentMinute}`, 'hh:mm');
+        if (currentTime.isBefore(moment('09:00', 'hh:mm'))) {
             const temp = {
                 textAlign: 'right',
                 marginTop: '20%',
                 marginRight: '-50%'
             };
             this.setState({ welcomeText: 'Good morning', bgName: 'ProfileMorningBG', currentStyle: temp });
-        } else if (current.hour() < 11 && current.minute() < 30) {
+        } else if (currentTime.isBefore(moment('11:30', 'hh:mm'))) {
             const temp = {
                 textAlign: 'right',
                 marginTop: '20%',
                 marginRight: '-50%'
             };
             this.setState({ welcomeText: 'Good morning', bgName: 'ProfileMorningBG', currentStyle: temp });
-        } else if (current.hour() < 13 && current.minute() < 30) {
+        } else if (currentTime.isBefore(moment('13:30', 'hh:mm'))) {
             const temp = {
                 textAlign: 'right',
                 marginTop: '10%',
                 marginRight: '-100%'
             };
             this.setState({ welcomeText: 'Good noon', bgName: 'ProfileNoonBG', currentStyle: temp });
-        } else if (current.hour() < 18) {
+        } else if (currentTime.isBefore(moment('18:00', 'hh:mm'))) {
             const temp = {
                 textAlign: 'right',
                 marginTop: '30%',
                 marginRight: '-105%'
             };
             this.setState({ welcomeText: 'Good afternoon', bgName: 'ProfileAfternoonBG', currentStyle: temp });
-        } else if (current.hour() < 20 && current.minute() < 30) {
+        } else if (currentTime.isBefore(moment('20:30', 'hh:mm'))) {
             const temp = {
                 textAlign: 'right',
                 marginTop: '40%',

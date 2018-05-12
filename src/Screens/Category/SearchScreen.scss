@@ -86,12 +86,17 @@
     position: relative;
     border-style: solid;
     border-width: 0.5px;
+    border-radius: 5%;
     border-color: lightgray;
     height: 330px;
     width: auto;
+    display: flex;
+    justify-content: center;
+    text-align: center;
     img {
       width: 250px;
       height: 250px;
+      margin-top: 2%;
     }
     .english {
       position: absolute;

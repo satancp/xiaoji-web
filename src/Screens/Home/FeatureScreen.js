@@ -10,24 +10,38 @@ import configs from '../../config';
 const OverPack = ScrollAnim.OverPack;
 
 const CategoryItem = props => {
-    const { name, logo } = props.item;
+    const { name, logo, id } = props.item;
     return (
         <div className={styles.categoryItem}>
-            <img src={logo} alt="category" />
-            <div className={styles.bottom} />
-            <p>{name}</p>
+            <a
+                onClick={() => {
+                    window.location.href = `/category/${id}`;
+                }}
+            >
+                <img src={logo} alt="category" />
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <div className={styles.bottom} />
+                </div>
+                <p>{name}</p>
+            </a>
         </div>
     );
 };
 
 const BrandItem = props => {
-    const { name, category, image } = props.item;
+    const { name, category, image, id, category_id } = props.item;
     return (
-        <div className={styles.brandItem}>
-            <img src={image} alt="brand" />
-            <p className={styles.english}>{name}</p>
-            <p className={styles.name}>{category}</p>
-        </div>
+        <a
+            onClick={() => {
+                window.location.href = `/resource/${id}/${category_id}`;
+            }}
+        >
+            <div className={styles.brandItem}>
+                <img src={image} alt="brand" />
+                <p className={styles.english}>{name}</p>
+                <p className={styles.name}>{category}</p>
+            </div>
+        </a>
     );
 };
 
@@ -46,7 +60,11 @@ export default class FeatureScreen extends Component {
             let temp = [];
             for (let i = 0; i < response.data.length; i++) {
                 if (i > 3) break;
-                temp.push({ name: response.data[i].display_name, logo: response.data[i].icon });
+                temp.push({
+                    name: response.data[i].display_name,
+                    logo: response.data[i].icon,
+                    id: response.data[i].id
+                });
             }
             this.setState({ CATEGORY_ITEMS: temp });
         });
@@ -58,7 +76,9 @@ export default class FeatureScreen extends Component {
                 temp.push({
                     name: response.data[i].name,
                     category: response.data[i].category,
-                    image: response.data[i].preview_image
+                    image: response.data[i].preview_image,
+                    id: response.data[i].id,
+                    category_id: response.data[i].category_id
                 });
             }
             this.setState({ BRAND_ITEMS: temp });

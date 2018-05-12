@@ -54,16 +54,17 @@ export default class TeamScreen extends Component {
                     <QueueAnim leaveReverse key="featureWrapper">
                         <QueueAnim leaveReverse type="scale" key="category" className={styles.brandWrapper}>
                             {this.state.SERVICE_ITEMS.map((item, index) => (
-                                <button
+                                <a
                                     onClick={this.linkToCategory.bind(this, item)}
                                     style={{
                                         backgroundColor: 'transparent',
-                                        borderColor: 'transparent'
+                                        borderColor: 'transparent',
+                                        color: 'black'
                                     }}
                                     key={index}
                                 >
                                     <ServiceItem item={item} key={index} />
-                                </button>
+                                </a>
                             ))}
                         </QueueAnim>
                     </QueueAnim>

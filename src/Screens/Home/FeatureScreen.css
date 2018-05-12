@@ -31,7 +31,8 @@
     width: 155px;
     margin-top: 80px;
     margin-right: 86px;
-    position: relative; }
+    position: relative;
+    text-align: center; }
     .container .categoryItem:last-child {
       margin-right: 0; }
     .container .categoryItem img {

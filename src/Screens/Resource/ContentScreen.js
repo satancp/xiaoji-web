@@ -174,16 +174,17 @@ export default class ContentScreen extends Component {
                                 Relevant
                                 <QueueAnim leaveReverse type="scale" key="category" className={styles.brandWrapper}>
                                     {this.state.currentRelevants.map((item, index) => (
-                                        <button
+                                        <a
                                             onClick={this.linkToResource.bind(this, item)}
                                             style={{
                                                 backgroundColor: 'transparent',
-                                                borderColor: 'transparent'
+                                                borderColor: 'transparent',
+                                                color: 'black'
                                             }}
                                             key={index}
                                         >
                                             <BrandItem item={item} key={index} />
-                                        </button>
+                                        </a>
                                     ))}
                                 </QueueAnim>
                             </QueueAnim>

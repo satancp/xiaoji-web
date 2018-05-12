@@ -9,6 +9,7 @@ import QueueAnim from 'rc-queue-anim';
 import { Modal, Button, Menu, Dropdown } from 'antd';
 import Cookies from 'universal-cookie';
 import LoginPage from './LoginHeader';
+import { Redirect } from 'react-router';
 
 const cookies = new Cookies();
 const Link = ScrollAnim.Link;
@@ -39,7 +40,8 @@ export default class Header extends Component {
             loginData: {},
             loginBtn: 'Login',
             loginModalBtn: 'Login',
-            loadingResend: false
+            loadingResend: false,
+            redirect: false
         };
         this.logout = () => {
             cookies.remove('loginInfo', { path: '/' });
@@ -49,8 +51,12 @@ export default class Header extends Component {
                 { label: 'Category', anchor: 'category' }
             ];
             this.props.homepage.checkCache();
-            this.setState({ hasLogin: false, loginData: {}, loginBtn: 'Login', loginModalBtn: 'Login' }, () => {
-                window.location.href = '/';
+            this.setState({
+                hasLogin: false,
+                loginData: {},
+                loginBtn: 'Login',
+                loginModalBtn: 'Login',
+                redirect: true
             });
         };
         this.loginpage = {
@@ -243,6 +249,9 @@ export default class Header extends Component {
                 </Menu.Item>
             </Menu>
         );
+        if (this.state.redirect) {
+            return <Redirect push to="/" />;
+        }
         return (
             <div className={className}>
                 <QueueAnim type="top" delay={400}>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import { observable, action } from 'mobx';
 import classNames from 'classnames';
+import { Redirect } from 'react-router';
 import styles from './Header.css';
 import { Image } from './UIKit';
 import ScrollAnim from 'rc-scroll-anim';
@@ -39,7 +40,8 @@ export default class ResourceHeader extends Component {
             hasLogin: false,
             loginData: {},
             loginBtn: 'Login',
-            category_id: parseInt(props.category_id, 10)
+            category_id: parseInt(props.category_id, 10),
+            redirect: false
         };
         this.setCategoryName = category_name => {
             this.vm.navs = [
@@ -54,9 +56,7 @@ export default class ResourceHeader extends Component {
         };
         this.logout = () => {
             cookies.remove('loginInfo', { path: '/' });
-            this.setState({ hasLogin: false, loginData: {}, loginBtn: 'Login' }, () => {
-                window.location.href = '/';
-            });
+            this.setState({ hasLogin: false, loginData: {}, loginBtn: 'Login', redirect: true });
         };
     }
 
@@ -130,6 +130,9 @@ export default class ResourceHeader extends Component {
                 </Menu.Item>
             </Menu>
         );
+        if (this.state.redirect) {
+            return <Redirect push="/" />;
+        }
         return (
             <div className={className}>
                 <QueueAnim type="top" delay={400}>

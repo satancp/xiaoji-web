@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router';
 import { observer } from 'mobx-react';
 import { observable, action } from 'mobx';
 import classNames from 'classnames';
@@ -37,13 +38,12 @@ export default class CategoryHeader extends Component {
             visible: false,
             hasLogin: false,
             loginData: {},
-            loginBtn: 'Login'
+            loginBtn: 'Login',
+            redirect: false
         };
         this.logout = () => {
             cookies.remove('loginInfo', { path: '/' });
-            this.setState({ hasLogin: false, loginData: {}, loginBtn: 'Login' }, () => {
-                window.location.href = '/';
-            });
+            this.setState({ hasLogin: false, loginData: {}, loginBtn: 'Login', redirect: true });
         };
     }
 
@@ -111,6 +111,9 @@ export default class CategoryHeader extends Component {
                 </Menu.Item>
             </Menu>
         );
+        if (this.state.redirect) {
+            return <Redirect push to="/" />;
+        }
         return (
             <div className={className}>
                 <QueueAnim type="top" delay={400}>

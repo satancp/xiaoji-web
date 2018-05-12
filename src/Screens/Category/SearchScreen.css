@@ -71,12 +71,17 @@
     position: relative;
     border-style: solid;
     border-width: 0.5px;
+    border-radius: 5%;
     border-color: lightgray;
     height: 330px;
-    width: auto; }
+    width: auto;
+    display: flex;
+    justify-content: center;
+    text-align: center; }
     .container .brandItem img {
       width: 250px;
-      height: 250px; }
+      height: 250px;
+      margin-top: 2%; }
     .container .brandItem .english {
       position: absolute;
       bottom: 0px;

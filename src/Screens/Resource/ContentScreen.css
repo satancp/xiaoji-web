@@ -72,22 +72,24 @@
     position: relative;
     border-style: solid;
     border-width: 0.5px;
+    border-radius: 5%;
     border-color: lightgray;
-    height: 200px; }
+    height: 200px;
+    display: flex;
+    justify-content: center; }
     .container .brandItem img {
       width: 132px;
       height: 132px;
-      margin-top: 1px; }
+      margin-top: 2%; }
     .container .brandItem .english {
       position: absolute;
-      bottom: 0px;
-      text-align: left;
-      font-size: 16px;
-      color: #1b1e27;
-      margin: 0 0 16px 0; }
+      bottom: -15px;
+      text-align: center;
+      font-size: 15px;
+      color: #1b1e27; }
     .container .brandItem .name {
       position: absolute;
-      bottom: 50px;
+      bottom: 40px;
       font-size: 14px;
       color: #6b707c;
       margin: 0; }

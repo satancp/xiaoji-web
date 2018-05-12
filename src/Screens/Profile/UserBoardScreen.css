@@ -1,32 +1,32 @@
-.resourceContainer {
+.container {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center; }
-  .resourceContainer .wrapper {
+  .container .wrapper {
     display: flex;
     flex-direction: column;
     align-items: center; }
-  .resourceContainer .title {
+  .container .title {
     color: #43aaed;
     font-size: 32px;
     font-weight: 400;
     letter-spacing: 2.22px;
     margin-top: 40px;
     margin-bottom: 50px; }
-  .resourceContainer .logo {
+  .container .logo {
     width: 156px;
     height: 98px; }
-  .resourceContainer .center {
+  .container .center {
     width: 480px;
     height: 76px;
     display: flex; }
-    .resourceContainer .center > div {
+    .container .center > div {
       width: 120px;
       display: flex;
       justify-content: center; }
-      .resourceContainer .center > div:after {
+      .container .center > div:after {
         position: absolute;
         top: 60%;
         right: -9px;
@@ -36,11 +36,11 @@
         width: 20px;
         height: 1px;
         background-color: #43aaed; }
-      .resourceContainer .center > div:last-child {
+      .container .center > div:last-child {
         margin-right: 0; }
-        .resourceContainer .center > div:last-child:after {
+        .container .center > div:last-child:after {
           display: none; }
-    .resourceContainer .center .border {
+    .container .center .border {
       width: 90px;
       height: 90px;
       border: 1px solid #43aaed;
@@ -52,8 +52,8 @@
       position: relative;
       padding: 10px;
       box-sizing: border-box; }
-      .resourceContainer .center .border > span {
+      .container .center .border > span {
         color: #43aaed;
         font-size: 14px; }
-  .resourceContainer .downloadButtons {
+  .container .downloadButtons {
     margin-top: 64px; }

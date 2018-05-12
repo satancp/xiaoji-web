@@ -87,24 +87,26 @@
     position: relative;
     border-style: solid;
     border-width: 0.5px;
+    border-radius: 5%;
     border-color: lightgray;
     height: 200px;
+    display: flex;
+    justify-content: center;
     img {
       width: 132px;
       height: 132px;
-      margin-top:1px;
+      margin-top:2%;
     }
     .english {
       position: absolute;
-      bottom: 0px;
-      text-align: left;
-      font-size: 16px;
+      bottom: -15px;
+      text-align: center;
+      font-size: 15px;
       color: $black;
-      margin: 0 0 16px 0;
     }
     .name {
       position: absolute;
-      bottom: 50px;
+      bottom: 40px;
       font-size: 14px;
       color: $grey;
       margin: 0;

@@ -63,19 +63,21 @@ export default class SearchScreen extends Component {
             }
             this.setState({ SERVICE_ITEMS: temp });
         });
-        axios.get(`${configs.server_url}resource/get_resources?category_id=${this.state.category_id}`).then(response => {
-            if (response.data.code === 0) response = response.data;
-            let temp = [];
-            for (let i = 0; i < response.data.length; i++) {
-                temp.push({
-                    id: response.data[i].id,
-                    name: response.data[i].name,
-                    creator: response.data[i].creator,
-                    image: response.data[i].preview_image
-                });
-            }
-            this.setState({ BRAND_ITEMS: temp });
-        });
+        axios
+            .get(`${configs.server_url}resource/get_resources?category_id=${this.state.category_id}`)
+            .then(response => {
+                if (response.data.code === 0) response = response.data;
+                let temp = [];
+                for (let i = 0; i < response.data.length; i++) {
+                    temp.push({
+                        id: response.data[i].id,
+                        name: response.data[i].name,
+                        creator: response.data[i].creator,
+                        image: response.data[i].preview_image
+                    });
+                }
+                this.setState({ BRAND_ITEMS: temp });
+            });
     }
 
     render() {
@@ -86,16 +88,17 @@ export default class SearchScreen extends Component {
                         <Title key="title" name="Categories" />
                         <QueueAnim leaveReverse type="scale" key="category" className={styles.serviceWrapper}>
                             {this.state.SERVICE_ITEMS.map((item, index) => (
-                                <button
+                                <a
                                     onClick={this.linkToCategory.bind(this, item)}
                                     style={{
                                         backgroundColor: 'transparent',
-                                        borderColor: 'transparent'
+                                        borderColor: 'transparent',
+                                        color: 'black'
                                     }}
                                     key={index}
                                 >
                                     <ServiceItem item={item} key={index} />
-                                </button>
+                                </a>
                             ))}
                         </QueueAnim>
                     </QueueAnim>
@@ -105,16 +108,17 @@ export default class SearchScreen extends Component {
                         <Title key="title" name={`${this.state.currentCategory} Items`} />
                         <QueueAnim leaveReverse type="scale" key="category" className={styles.brandWrapper}>
                             {this.state.BRAND_ITEMS.map((item, index) => (
-                                <button
+                                <a
                                     onClick={this.linkToResource.bind(this, item)}
                                     style={{
                                         backgroundColor: 'transparent',
-                                        borderColor: 'transparent'
+                                        borderColor: 'transparent',
+                                        color: 'black'
                                     }}
                                     key={index}
                                 >
                                     <BrandItem item={item} key={index} />
-                                </button>
+                                </a>
                             ))}
                         </QueueAnim>
                     </QueueAnim>

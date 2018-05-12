@@ -11,19 +11,25 @@ import configs from '../../config';
 const OverPack = ScrollAnim.OverPack;
 
 const IntroItem = props => {
-    const { title, subTitle, img, desc, pos } = props.item;
+    const { title, subTitle, img, desc, pos, resource_id, category_id } = props.item;
     const className = classNames(styles.introItem, styles[pos]);
     return (
-        <div className={className}>
-            <div className={styles.watermark}>{props.index}</div>
-            <img src={img} className={styles.image} alt="logo" />
-            <div className={styles.textWrapper}>
-                <h2>{title}</h2>
-                <h3>{subTitle}</h3>
-                <div className={styles.divider} />
-                <p>{desc}</p>
+        <a
+            onClick={() => {
+                window.location.href = `/resource/${resource_id}/${category_id}`;
+            }}
+        >
+            <div className={className}>
+                <div className={styles.watermark}>{props.index}</div>
+                <img src={img} className={styles.image} alt="logo" />
+                <div className={styles.textWrapper}>
+                    <h2>{title}</h2>
+                    <h3>{subTitle}</h3>
+                    <div className={styles.divider} />
+                    <p>{desc}</p>
+                </div>
             </div>
-        </div>
+        </a>
     );
 };
 
@@ -35,7 +41,9 @@ export default class IntroScreen extends Component {
             img: Image.Intro1,
             desc: '',
             index: 1,
-            pos: 'left'
+            pos: 'left',
+            resource_id: 1,
+            category_id: 1
         },
         {
             title: '',
@@ -43,7 +51,9 @@ export default class IntroScreen extends Component {
             img: Image.Intro2,
             desc: '',
             index: 2,
-            pos: 'center'
+            pos: 'center',
+            resource_id: 1,
+            category_id: 1
         },
         {
             title: '',
@@ -51,7 +61,9 @@ export default class IntroScreen extends Component {
             img: Image.Intro3,
             desc: '',
             index: 3,
-            pos: 'right'
+            pos: 'right',
+            resource_id: 1,
+            category_id: 1
         }
     ];
 
@@ -74,6 +86,8 @@ export default class IntroScreen extends Component {
                     this.INTRO_ITEMS[i].subTitle = response.data[i].category;
                     this.INTRO_ITEMS[i].img = response.data[i].preview_image;
                     this.INTRO_ITEMS[i].desc = response.data[i].desc;
+                    this.INTRO_ITEMS[i].category_id = response.data[i].category_id;
+                    this.INTRO_ITEMS[i].resource_id = response.data[i].resource_id;
                 } else break;
             }
         });
