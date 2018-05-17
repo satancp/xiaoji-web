@@ -1,51 +1,51 @@
-import React, { Component } from 'react';
-import styles from './UserProfileScreen.css';
-import { Image } from '~/Components/UIKit';
-import QueueAnim from 'rc-queue-anim';
-import Cookies from 'universal-cookie';
-import axios from 'axios';
-import configs from '../../config';
-import moment from 'moment';
-import { Title } from '~/Components/Title';
-import { Table, Timeline, Badge, Tooltip, Button, Icon, Divider, notification } from 'antd';
-import { Footer } from '../../Components/Footer';
+import React, {Component} from 'react'
+import styles from './UserProfileScreen.css'
+import {Image} from '~/Components/UIKit'
+import QueueAnim from 'rc-queue-anim'
+import Cookies from 'universal-cookie'
+import axios from 'axios'
+import configs from '../../config'
+import moment from 'moment'
+import {Title} from '~/Components/Title'
+import {Table, Timeline, Badge, Tooltip, Button, Icon, Divider, notification} from 'antd'
+import {Footer} from '../../Components/Footer'
 
-const cookies = new Cookies();
+const cookies = new Cookies()
 
 export default class UserProfileScreen extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.columns = [
-            { title: 'Name', dataIndex: 'name', key: 'name' },
-            { title: 'Category', dataIndex: 'category', key: 'category', width: 120 },
-            { title: 'Description', dataIndex: 'desc', key: 'desc' },
+            {title: 'Name', dataIndex: 'name', key: 'name'},
+            {title: 'Category', dataIndex: 'category', key: 'category', width: 120},
+            {title: 'Description', dataIndex: 'desc', key: 'desc'},
             {
                 title: 'Preview Image',
                 dataIndex: 'preview_image',
                 key: 'preview_image',
                 width: 50,
-                render: text => <img alt={text} src={text} style={{ width: 100, height: 100 }} />
+                render: text => <img alt={text} src={text} style={{width: 100, height: 100}} />
             },
             {
                 title: 'Published Time',
                 dataIndex: 'created_at',
                 key: 'created_at',
                 render: text => {
-                    const year = moment(text, moment.ISO_8601).year();
+                    const year = moment(text, moment.ISO_8601).year()
                     const month = moment(text, moment.ISO_8601)
                         .month()
                         .toString()
-                        .padStart(2, '0');
+                        .padStart(2, '0')
                     const day = moment(text, moment.ISO_8601)
                         .date()
                         .toString()
-                        .padStart(2, '0');
-                    const hour = moment(text, moment.ISO_8601).hour();
+                        .padStart(2, '0')
+                    const hour = moment(text, moment.ISO_8601).hour()
                     const minute = moment(text, moment.ISO_8601)
                         .minute()
                         .toString()
-                        .padStart(2, '0');
-                    return <p>{year + '-' + month + '-' + day + ' ' + hour + ':' + minute}</p>;
+                        .padStart(2, '0')
+                    return <p>{year + '-' + month + '-' + day + ' ' + hour + ':' + minute}</p>
                 }
             },
             {
@@ -67,7 +67,7 @@ export default class UserProfileScreen extends Component {
                     }
                 ],
                 onFilter: (value, record) => {
-                    return record.status === value;
+                    return record.status === value
                 },
                 render: (text, record) => {
                     if (record.status === 0) {
@@ -75,25 +75,25 @@ export default class UserProfileScreen extends Component {
                             <span>
                                 <Badge status="processing" />Pending
                             </span>
-                        );
+                        )
                     } else if (record.status === 1) {
                         return (
                             <span>
                                 <Badge status="error" />Abandoned
                             </span>
-                        );
+                        )
                     } else if (record.status === 2) {
                         return (
                             <span>
                                 <Badge status="success" />Approved
                             </span>
-                        );
+                        )
                     } else {
                         return (
                             <span>
                                 <Badge status="warning" />Warning
                             </span>
-                        );
+                        )
                     }
                 }
             },
@@ -110,12 +110,12 @@ export default class UserProfileScreen extends Component {
                                         shape="circle"
                                         icon="delete"
                                         onClick={() => {
-                                            this.applyToDelete(record);
+                                            this.applyToDelete(record)
                                         }}
                                     />
                                 </Tooltip>
                             </span>
-                        );
+                        )
                     } else {
                         return (
                             <span>
@@ -125,7 +125,7 @@ export default class UserProfileScreen extends Component {
                                         shape="circle"
                                         icon="search"
                                         onClick={() => {
-                                            window.location.href = `/resource/${record.id}/${record.category_id}`;
+                                            window.location.href = `/resource/${record.id}/${record.category_id}`
                                         }}
                                     />
                                 </Tooltip>
@@ -136,16 +136,16 @@ export default class UserProfileScreen extends Component {
                                         shape="circle"
                                         icon="delete"
                                         onClick={() => {
-                                            this.applyToDelete(record);
+                                            this.applyToDelete(record)
                                         }}
                                     />
                                 </Tooltip>
                             </span>
-                        );
+                        )
                     }
                 }
             }
-        ];
+        ]
         this.state = {
             loginData: cookies.get('loginInfo'),
             welcomeText: '',
@@ -156,9 +156,9 @@ export default class UserProfileScreen extends Component {
                 marginRight: '-100%'
             },
             allResources: []
-        };
+        }
         this.applyToDelete = data => {
-            const cache = cookies.get('loginInfo');
+            const cache = cookies.get('loginInfo')
             axios
                 .post(`${configs.server_url}resource/apply_to_delete`, {
                     user_id: cache.id,
@@ -166,28 +166,28 @@ export default class UserProfileScreen extends Component {
                 })
                 .then(response => {
                     if (response.data.code === 0) {
-                        this.openNotification('Success', 'You apply to delete it successfully');
+                        this.openNotification('Success', 'You apply to delete it successfully')
                     } else {
-                        this.openNotification('Error', response.data.msg);
+                        this.openNotification('Error', response.data.msg)
                     }
                 })
                 .catch(error => {
-                    this.openNotification('Error', 'You fail to apply');
-                });
-        };
+                    this.openNotification('Error', 'You fail to apply')
+                })
+        }
         this.openNotification = (msg, desc) => {
             notification.open({
                 message: msg,
                 description: desc,
                 placement: 'topLeft'
-            });
-        };
+            })
+        }
     }
 
     componentDidMount() {
-        const cache = cookies.get('loginInfo');
+        const cache = cookies.get('loginInfo')
         if (!cache) {
-            window.location = '/';
+            window.location = '/'
         }
         axios
             .get(
@@ -195,82 +195,80 @@ export default class UserProfileScreen extends Component {
                     ${this.state.loginData.id}`
             )
             .then(response => {
-                if (response.data.code === 0) response = response.data;
+                if (response.data.code === 0) response = response.data
                 this.setState({
                     allResources: response.data
-                });
-            });
+                })
+            })
     }
 
     convertStyle(text) {
-        const year = moment(text, moment.ISO_8601).year();
+        const year = moment(text, moment.ISO_8601).year()
         const month = moment(text, moment.ISO_8601)
             .month()
             .toString()
-            .padStart(2, '0');
+            .padStart(2, '0')
         const day = moment(text, moment.ISO_8601)
             .date()
             .toString()
-            .padStart(2, '0');
-        const hour = moment(text, moment.ISO_8601).hour();
+            .padStart(2, '0')
+        const hour = moment(text, moment.ISO_8601).hour()
         const minute = moment(text, moment.ISO_8601)
             .minute()
             .toString()
-            .padStart(2, '0');
-        return year + '-' + month + '-' + day + ' ' + hour + ':' + minute;
+            .padStart(2, '0')
+        return year + '-' + month + '-' + day + ' ' + hour + ':' + minute
     }
 
     render() {
         return (
-            <div id="user_resource" className={styles.resourceContainer}>
+            <div id="user_resource" className={styles.resourceContainer} style={{marginTop: '10%'}}>
                 <QueueAnim className={styles.wrapper} type="scaleBig" delay={200} duration={600}>
                     <Title key="user_resource_title" name="Resources You Published" />
                     <Table
                         columns={this.columns}
-                        style={{ marginTop: '1%', width: 'auto', marginLeft: '5%', marginRight: '5%' }}
+                        style={{marginTop: '1%', width: 'auto', marginLeft: '5%', marginRight: '5%'}}
                         rowKey={(record, index) => {
-                            return record.id;
+                            return record.id
                         }}
                         expandedRowRender={record => {
                             const temp = [
                                 <Timeline.Item>
                                     Publish this resource at {this.convertStyle(record.created_at)}
                                 </Timeline.Item>
-                            ];
+                            ]
                             if (record.status === 0) {
                                 temp.push(
                                     <Timeline.Item
-                                        dot={<Icon type="clock-circle-o" style={{ fontSize: '16px' }} />}
-                                        color="green"
-                                    >
+                                        dot={<Icon type="clock-circle-o" style={{fontSize: '16px'}} />}
+                                        color="green">
                                         Still waiting for being approved
                                     </Timeline.Item>
-                                );
+                                )
                             } else if (record.status === 1) {
-                                temp.push(<Timeline.Item>Waiting for being approved</Timeline.Item>);
+                                temp.push(<Timeline.Item>Waiting for being approved</Timeline.Item>)
                                 temp.push(
                                     <Timeline.Item
-                                        dot={<Icon type="close-circle-o" style={{ fontSize: '16px' }} />}
-                                        color="red"
-                                    >
+                                        dot={<Icon type="close-circle-o" style={{fontSize: '16px'}} />}
+                                        color="red">
                                         Be abandoned at {this.convertStyle(record.updated_at)}
                                     </Timeline.Item>
-                                );
+                                )
                             } else if (record.status === 2) {
-                                temp.push(<Timeline.Item>Waiting for being approved</Timeline.Item>);
+                                temp.push(<Timeline.Item>Waiting for being approved</Timeline.Item>)
                                 temp.push(
-                                    <Timeline.Item dot={<Icon type="check-circle-o" style={{ fontSize: '16px' }} />}>
+                                    <Timeline.Item dot={<Icon type="check-circle-o" style={{fontSize: '16px'}} />}>
                                         Be approved at {this.convertStyle(record.updated_at)}
                                     </Timeline.Item>
-                                );
+                                )
                             }
-                            return <Timeline>{temp}</Timeline>;
+                            return <Timeline>{temp}</Timeline>
                         }}
                         dataSource={this.state.allResources}
                     />
                     <Footer />
                 </QueueAnim>
             </div>
-        );
+        )
     }
 }

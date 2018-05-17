@@ -1,32 +1,34 @@
-.container {
+.boardContainer {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; }
-  .container .wrapper {
+  justify-content: center;
+  margin-top: 10%;
+  margin-bottom: 10%; }
+  .boardContainer .wrapper {
     display: flex;
     flex-direction: column;
     align-items: center; }
-  .container .title {
+  .boardContainer .title {
     color: #43aaed;
     font-size: 32px;
     font-weight: 400;
     letter-spacing: 2.22px;
     margin-top: 40px;
     margin-bottom: 50px; }
-  .container .logo {
+  .boardContainer .logo {
     width: 156px;
     height: 98px; }
-  .container .center {
+  .boardContainer .center {
     width: 480px;
     height: 76px;
     display: flex; }
-    .container .center > div {
+    .boardContainer .center > div {
       width: 120px;
       display: flex;
       justify-content: center; }
-      .container .center > div:after {
+      .boardContainer .center > div:after {
         position: absolute;
         top: 60%;
         right: -9px;
@@ -36,11 +38,11 @@
         width: 20px;
         height: 1px;
         background-color: #43aaed; }
-      .container .center > div:last-child {
+      .boardContainer .center > div:last-child {
         margin-right: 0; }
-        .container .center > div:last-child:after {
+        .boardContainer .center > div:last-child:after {
           display: none; }
-    .container .center .border {
+    .boardContainer .center .border {
       width: 90px;
       height: 90px;
       border: 1px solid #43aaed;
@@ -52,8 +54,8 @@
       position: relative;
       padding: 10px;
       box-sizing: border-box; }
-      .container .center .border > span {
+      .boardContainer .center .border > span {
         color: #43aaed;
         font-size: 14px; }
-  .container .downloadButtons {
+  .boardContainer .downloadButtons {
     margin-top: 64px; }

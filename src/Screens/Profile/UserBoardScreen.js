@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import styles from './UserProfileScreen.css';
-import QueueAnim from 'rc-queue-anim';
-import Cookies from 'universal-cookie';
-import axios from 'axios';
-import configs from '../../config';
-import moment from 'moment';
-import { Title } from '~/Components/Title';
-import { notification, Button, Tooltip, Menu, Dropdown, Icon, Input, Form, Modal } from 'antd';
-import Gallery from 'react-grid-gallery';
+import React, {Component} from 'react'
+import styles from './UserProfileScreen.css'
+import QueueAnim from 'rc-queue-anim'
+import Cookies from 'universal-cookie'
+import axios from 'axios'
+import configs from '../../config'
+import moment from 'moment'
+import {Title} from '~/Components/Title'
+import {notification, Button, Tooltip, Menu, Dropdown, Icon, Input, Form, Modal} from 'antd'
+import Gallery from 'react-grid-gallery'
 
-const cookies = new Cookies();
-const confirmModal = Modal.confirm;
-const FormItem = Form.Item;
+const cookies = new Cookies()
+const confirmModal = Modal.confirm
+const FormItem = Form.Item
 const captionStyle = {
     backgroundColor: 'rgba(0, 0, 0, 0.8)',
     maxHeight: '240px',
@@ -22,7 +22,7 @@ const captionStyle = {
     color: 'white',
     padding: '2px',
     fontSize: '90%'
-};
+}
 
 const customTagStyle = {
     wordWrap: 'break-word',
@@ -37,12 +37,13 @@ const customTagStyle = {
     color: 'black',
     verticalAlign: 'baseline',
     margin: '2px'
-};
+}
 
 class UserBoardScreen extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
+            showAllEditInput: {},
             loadingAdd: false,
             showAddInput: false,
             sizeStore: [
@@ -80,26 +81,33 @@ class UserBoardScreen extends Component {
                 }
             ],
             allBoards: []
-        };
-        this.existRandoms = {};
+        }
+        this.existRandoms = {}
         this.setCustomTags = i => {
             return i.tags.map(t => {
                 return (
-                    <div key={t.value} style={{ ...customTagStyle, color: t.tag.color }}>
+                    <div key={t.value} style={{...customTagStyle, color: t.tag.color}}>
                         {t.title}
                     </div>
-                );
-            });
-        };
+                )
+            })
+        }
         this.openNotification = (msg, desc) => {
             notification.open({
                 message: msg,
                 description: desc,
                 placement: 'topLeft'
-            });
-        };
-        this.viewBoard = () => {};
-        this.editBoard = () => {};
+            })
+        }
+        this.viewBoard = () => {
+            const cache = cookies.get('loginInfo')
+            window.location.href = `/user/${cache.id}/board/${this.currentBoardId}`
+        }
+        this.editBoard = () => {
+            let showAllEditInput = {}
+            showAllEditInput[this.currentBoardId] = true
+            this.setState({showAllEditInput})
+        }
         this.deleteBoard = () => {
             confirmModal({
                 okText: 'Confirm',
@@ -114,43 +122,43 @@ class UserBoardScreen extends Component {
                             })
                             .then(response => {
                                 if (response.data.code === 0) {
-                                    this.openNotification('Success', 'You succeed to delete a board');
-                                    resolve();
-                                    const cache = cookies.get('loginInfo');
+                                    this.openNotification('Success', 'You succeed to delete a board')
+                                    resolve()
+                                    const cache = cookies.get('loginInfo')
                                     axios
                                         .get(
                                             `${configs.server_url}board/list?user_id=
                         ${cache.id}`
                                         )
                                         .then(response => {
-                                            if (response.data.code === 0) response = response.data;
+                                            if (response.data.code === 0) response = response.data
                                             this.setState({
                                                 allBoards: response.data
-                                            });
-                                        });
+                                            })
+                                        })
                                 } else {
-                                    this.openNotification('Error', response.data.msg);
-                                    reject();
+                                    this.openNotification('Error', response.data.msg)
+                                    reject()
                                 }
                             })
                             .catch(err => {
-                                this.openNotification('Error', 'You fail to delete it');
-                                reject();
-                            });
-                    }).catch(() => this.openNotification('Error', 'You fail to delete it'));
+                                this.openNotification('Error', 'You fail to delete it')
+                                reject()
+                            })
+                    }).catch(() => this.openNotification('Error', 'You fail to delete it'))
                 },
                 onCancel: () => {
-                    this.currentBoardId = 0;
+                    this.currentBoardId = 0
                 }
-            });
-        };
-        this.currentBoardId = 0;
+            })
+        }
+        this.currentBoardId = 0
     }
 
     componentDidMount() {
-        const cache = cookies.get('loginInfo');
+        const cache = cookies.get('loginInfo')
         if (!cache) {
-            window.location = '/';
+            window.location = '/'
         }
         axios
             .get(
@@ -158,33 +166,33 @@ class UserBoardScreen extends Component {
                     ${cache.id}`
             )
             .then(response => {
-                if (response.data.code === 0) response = response.data;
+                if (response.data.code === 0) response = response.data
                 this.setState({
                     allBoards: response.data
-                });
-            });
+                })
+            })
     }
 
     convertStyle(text) {
-        const year = moment(text, moment.ISO_8601).year();
+        const year = moment(text, moment.ISO_8601).year()
         const month = moment(text, moment.ISO_8601)
             .month()
             .toString()
-            .padStart(2, '0');
+            .padStart(2, '0')
         const day = moment(text, moment.ISO_8601)
             .date()
             .toString()
-            .padStart(2, '0');
-        const hour = moment(text, moment.ISO_8601).hour();
+            .padStart(2, '0')
+        const hour = moment(text, moment.ISO_8601).hour()
         const minute = moment(text, moment.ISO_8601)
             .minute()
             .toString()
-            .padStart(2, '0');
-        return year + '-' + month + '-' + day + ' ' + hour + ':' + minute;
+            .padStart(2, '0')
+        return year + '-' + month + '-' + day + ' ' + hour + ':' + minute
     }
 
     render() {
-        const { getFieldDecorator } = this.props.form;
+        const {getFieldDecorator} = this.props.form
         const menuForNoInfo = (
             <Menu>
                 <Menu.Item key="0">
@@ -194,7 +202,7 @@ class UserBoardScreen extends Component {
                             shape="circle"
                             icon="search"
                             size="default"
-                            style={{ marginTop: '0%', marginLeft: '5%' }}
+                            style={{marginTop: '0%', marginLeft: '5%'}}
                             onClick={this.viewBoard}
                         />
                     </Tooltip>
@@ -232,7 +240,7 @@ class UserBoardScreen extends Component {
                     </Tooltip>
                 </Menu.Item>
             </Menu>
-        );
+        )
         const menuForHasInfo = (
             <Menu>
                 <Menu.Item key="0">
@@ -242,7 +250,7 @@ class UserBoardScreen extends Component {
                             shape="circle"
                             icon="search"
                             size="default"
-                            style={{ marginTop: '0%', marginLeft: '5%' }}
+                            style={{marginTop: '0%', marginLeft: '5%'}}
                             onClick={this.viewBoard}
                         />
                     </Tooltip>
@@ -265,9 +273,9 @@ class UserBoardScreen extends Component {
                     </Tooltip>
                 </Menu.Item>
             </Menu>
-        );
+        )
         return (
-            <div id="user_board" className={styles.container}>
+            <div id="user_board" className={styles.boardContainer} style={{marginTop: '10%'}}>
                 <QueueAnim className={styles.wrapper} type="scaleBig" delay={200} duration={600}>
                     <Title key="user_resource_title" name="Your Board" />
                     <div
@@ -277,19 +285,18 @@ class UserBoardScreen extends Component {
                             gridTemplateColumns: 'repeat(4, 15rem)',
                             gridGap: '60px',
                             justifyContent: 'center'
-                        }}
-                    >
+                        }}>
                         <Button
                             disabled={this.state.loadingAdd}
                             onMouseEnter={() => {
-                                document.getElementById('add-new-board-btn').style.backgroundColor = '#ddd';
+                                document.getElementById('add-new-board-btn').style.backgroundColor = '#ddd'
                             }}
                             onMouseLeave={() => {
-                                this.setState({ showAddInput: false });
-                                document.getElementById('add-new-board-btn').style.backgroundColor = 'transparent';
+                                this.setState({showAddInput: false})
+                                document.getElementById('add-new-board-btn').style.backgroundColor = 'transparent'
                             }}
                             onClick={() => {
-                                this.setState({ showAddInput: true });
+                                this.setState({showAddInput: true})
                             }}
                             id="add-new-board-btn"
                             style={{
@@ -301,8 +308,7 @@ class UserBoardScreen extends Component {
                                 border: '1px solid #ddd',
                                 borderRadius: '2%',
                                 backgroundColor: 'transparent'
-                            }}
-                        >
+                            }}>
                             {!this.state.showAddInput ? (
                                 this.state.loadingAdd ? (
                                     <Icon
@@ -332,30 +338,30 @@ class UserBoardScreen extends Component {
                                     />
                                 )
                             ) : (
-                                <FormItem style={{ marginBottom: 0 }}>
+                                <FormItem style={{marginBottom: 0}}>
                                     {getFieldDecorator('name', {
-                                        rules: [{ required: true, message: 'You should input a name' }]
+                                        rules: [{required: true, message: 'You should input a name'}]
                                     })(
                                         <Input
                                             placeholder="Input Name"
                                             onPressEnter={() => {
-                                                this.setState({ loadingAdd: true });
-                                                const cache = cookies.get('loginInfo');
+                                                this.setState({loadingAdd: true})
+                                                const cache = cookies.get('loginInfo')
                                                 this.props.form.validateFields(['name'], (errors, values) => {
-                                                    if (errors) return;
-                                                    const value = values['name'];
+                                                    if (errors) return
+                                                    const value = values['name']
                                                     axios
                                                         .post(`${configs.server_url}board/add`, {
                                                             name: value,
                                                             user_id: cache.id
                                                         })
                                                         .then(response => {
-                                                            this.setState({ loadingAdd: false }, () => {
+                                                            this.setState({loadingAdd: false}, () => {
                                                                 if (response.data.code === 0) {
                                                                     this.openNotification(
                                                                         'Success',
                                                                         'You succeed to add a new board'
-                                                                    );
+                                                                    )
                                                                     axios
                                                                         .get(
                                                                             `${configs.server_url}board/list?user_id=
@@ -363,25 +369,25 @@ class UserBoardScreen extends Component {
                                                                         )
                                                                         .then(response => {
                                                                             if (response.data.code === 0)
-                                                                                response = response.data;
+                                                                                response = response.data
                                                                             this.setState({
                                                                                 allBoards: response.data
-                                                                            });
-                                                                        });
+                                                                            })
+                                                                        })
                                                                 } else {
-                                                                    this.openNotification('Error', response.data.msg);
+                                                                    this.openNotification('Error', response.data.msg)
                                                                 }
-                                                            });
+                                                            })
                                                         })
                                                         .catch(error => {
-                                                            this.setState({ loadingAdd: false }, () => {
+                                                            this.setState({loadingAdd: false}, () => {
                                                                 this.openNotification(
                                                                     'Error',
                                                                     'You fail to add a new board'
-                                                                );
-                                                            });
-                                                        });
-                                                });
+                                                                )
+                                                            })
+                                                        })
+                                                })
                                             }}
                                         />
                                     )}
@@ -390,35 +396,126 @@ class UserBoardScreen extends Component {
                         </Button>
                         {this.state.allBoards.map((value1, index1) => {
                             const images = value1.resources.map((value2, index2) => {
-                                value2 = value2.resource;
-                                value2.src = value2.preview_image;
-                                value2.thumbnail = value2.preview_image;
+                                value2 = value2.resource
+                                value2.src = value2.preview_image
+                                value2.thumbnail = value2.preview_image
                                 value2.tags.map((value3, index) => {
-                                    value3.value = value3.tag.name;
-                                    value3.title = value3.tag.name;
-                                    return value3;
-                                });
-                                let randomNumber = 0;
+                                    value3.value = value3.tag.name
+                                    value3.title = value3.tag.name
+                                    return value3
+                                })
+                                let randomNumber = 0
                                 if (this.existRandoms[index2]) {
-                                    randomNumber = this.existRandoms[index2];
+                                    randomNumber = this.existRandoms[index2]
                                 } else {
-                                    randomNumber = Math.floor(Math.random() * 7);
-                                    this.existRandoms[index2] = randomNumber;
+                                    randomNumber = Math.floor(Math.random() * 7)
+                                    this.existRandoms[index2] = randomNumber
                                 }
-                                value2.thumbnailWidth = this.state.sizeStore[randomNumber].thumbnailWidth;
-                                value2.thumbnailHeight = this.state.sizeStore[randomNumber].thumbnailHeight;
-                                value2.caption = value2.name;
+                                value2.thumbnailWidth = this.state.sizeStore[randomNumber].thumbnailWidth
+                                value2.thumbnailHeight = this.state.sizeStore[randomNumber].thumbnailHeight
+                                value2.caption = value2.name
                                 value2.customOverlay = (
                                     <div style={captionStyle}>
                                         <div>{value2.caption}</div>
                                         {value2.hasOwnProperty('tags') && this.setCustomTags(value2)}
                                     </div>
-                                );
-                                return value2;
-                            });
+                                )
+                                return value2
+                            })
                             return (
                                 <div key={value1.id}>
-                                    {images.length !== 0 ? (
+                                    {this.state.showAllEditInput[value1.id] ? (
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                width: '15rem',
+                                                height: '20rem',
+                                                border: '1px solid #ddd',
+                                                overflow: 'auto',
+                                                borderRadius: '2%'
+                                            }}
+                                            onMouseLeave={() => {
+                                                let showAllEditInput = {}
+                                                showAllEditInput[value1.id] = false
+                                                this.setState({
+                                                    showAllEditInput
+                                                })
+                                            }}>
+                                            <FormItem style={{marginBottom: 0}}>
+                                                {getFieldDecorator('name', {
+                                                    rules: [{required: true, message: 'You should input a name'}],
+                                                    initialValue: value1.name
+                                                })(
+                                                    <Input
+                                                        placeholder="Input Name"
+                                                        onPressEnter={() => {
+                                                            this.setState({loadingAdd: true})
+                                                            const cache = cookies.get('loginInfo')
+                                                            this.props.form.validateFields(
+                                                                ['name'],
+                                                                (errors, values) => {
+                                                                    if (errors) return
+                                                                    const value = values['name']
+                                                                    axios
+                                                                        .post(`${configs.server_url}board/update`, {
+                                                                            id: value1.id,
+                                                                            name: value
+                                                                        })
+                                                                        .then(response => {
+                                                                            this.setState({loadingAdd: false}, () => {
+                                                                                if (response.data.code === 0) {
+                                                                                    this.openNotification(
+                                                                                        'Success',
+                                                                                        'You succeed to update the board'
+                                                                                    )
+                                                                                    axios
+                                                                                        .get(
+                                                                                            `${
+                                                                                                configs.server_url
+                                                                                            }board/list?user_id=
+                        ${cache.id}`
+                                                                                        )
+                                                                                        .then(response => {
+                                                                                            if (
+                                                                                                response.data.code === 0
+                                                                                            )
+                                                                                                response = response.data
+                                                                                            let showAllEditInput = {}
+                                                                                            showAllEditInput[
+                                                                                                value1.id
+                                                                                            ] = false
+                                                                                            this.setState({
+                                                                                                allBoards:
+                                                                                                    response.data,
+                                                                                                showAllEditInput
+                                                                                            })
+                                                                                        })
+                                                                                } else {
+                                                                                    this.openNotification(
+                                                                                        'Error',
+                                                                                        response.data.msg
+                                                                                    )
+                                                                                }
+                                                                            })
+                                                                        })
+                                                                        .catch(error => {
+                                                                            this.setState({loadingAdd: false}, () => {
+                                                                                this.openNotification(
+                                                                                    'Error',
+                                                                                    'You fail to update the board'
+                                                                                )
+                                                                            })
+                                                                        })
+                                                                }
+                                                            )
+                                                        }}
+                                                    />
+                                                )}
+                                            </FormItem>
+                                        </div>
+                                    ) : images.length !== 0 ? (
                                         <div
                                             style={{
                                                 display: 'block',
@@ -428,20 +525,19 @@ class UserBoardScreen extends Component {
                                                 border: '1px solid #ddd',
                                                 overflow: 'auto',
                                                 borderRadius: '2%'
-                                            }}
-                                        >
+                                            }}>
                                             <Gallery
                                                 images={images}
                                                 enableImageSelection={false}
                                                 backdropClosesModal={true}
                                                 showLightboxThumbnails={true}
                                                 onClickImage={e => {
-                                                    console.log(e.target);
+                                                    console.log(e.target)
                                                 }}
                                                 onClickThumbnail={index => {
                                                     window.location.href = `/resource/${images[index].id}/${
                                                         images[index].category_id
-                                                    }/`;
+                                                    }/`
                                                 }}
                                             />
                                         </div>
@@ -455,11 +551,10 @@ class UserBoardScreen extends Component {
                                                 height: '20rem',
                                                 border: '1px solid #ddd',
                                                 borderRadius: '2%'
-                                            }}
-                                        >
+                                            }}>
                                             <img
                                                 alt="empty_board"
-                                                style={{ width: '23rem', marginLeft: '9.5%' }}
+                                                style={{width: '23rem', marginLeft: '9.5%'}}
                                                 src={
                                                     'https://xiaoji-web.oss-cn-hangzhou.aliyuncs.com/web/empty_board_en.png'
                                                 }
@@ -480,9 +575,8 @@ class UserBoardScreen extends Component {
                                             borderRightStyle: 'solid',
                                             borderBottomRightRadius: '40%',
                                             marginTop: '-1%'
-                                        }}
-                                    >
-                                        <h2 style={{ marginTop: '2.5%' }}>{value1.name}</h2>
+                                        }}>
+                                        <h2 style={{marginTop: '2.5%'}}>{value1.name}</h2>
                                         {images.length !== 0 ? (
                                             <Tooltip placement="top" title="Actions">
                                                 <Dropdown overlay={menuForHasInfo} trigger={['click']}>
@@ -491,7 +585,10 @@ class UserBoardScreen extends Component {
                                                         shape="circle"
                                                         icon="bars"
                                                         size="default"
-                                                        style={{ marginTop: '0%', marginLeft: '5%' }}
+                                                        onClick={() => {
+                                                            this.currentBoardId = value1.id
+                                                        }}
+                                                        style={{marginTop: '0%', marginLeft: '5%'}}
                                                     />
                                                 </Dropdown>
                                             </Tooltip>
@@ -504,24 +601,24 @@ class UserBoardScreen extends Component {
                                                         icon="bars"
                                                         size="default"
                                                         onClick={() => {
-                                                            this.currentBoardId = value1.id;
+                                                            this.currentBoardId = value1.id
                                                         }}
-                                                        style={{ marginTop: '0%', marginLeft: '5%' }}
+                                                        style={{marginTop: '0%', marginLeft: '5%'}}
                                                     />
                                                 </Dropdown>
                                             </Tooltip>
                                         )}
                                     </div>
                                 </div>
-                            );
+                            )
                         })}
                     </div>
                 </QueueAnim>
             </div>
-        );
+        )
     }
 }
 
-let UserBoardScreenReal;
+let UserBoardScreenReal
 
-export default (UserBoardScreenReal = Form.create()(UserBoardScreen));
+export default (UserBoardScreenReal = Form.create()(UserBoardScreen))

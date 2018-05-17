@@ -1,23 +1,23 @@
 import React, {Component} from 'react'
-import SearchScreen from '~/Screens/Category/SearchScreen'
-import VirtualHomeScreen from '~/Screens/Category/VirtualHomeScreen'
-import CategoryHeader from '~/Components/CategoryHeader'
+import ContentScreen from '~/Screens/Board/ContentScreen'
+import VirtualHomeScreen from '~/Screens/Board/VirtualHomeScreen'
+import SimpleHeader from '~/Components/SimpleHeader'
 import Particle from '~/Components/Particle'
 import {Footer} from '../Components/Footer'
 
 export default class CategorySearchPage extends Component {
     constructor(props) {
         super(props)
-        this.category_id = props.match.params.category_id
+        this.board_id = props.match.params.board_id
     }
 
     render() {
         return (
             <div>
-                <CategoryHeader />
+                <SimpleHeader />
                 <Particle />
                 <VirtualHomeScreen />
-                <SearchScreen category_id={this.category_id} />
+                <ContentScreen board_id={this.board_id} />
                 <Footer />
             </div>
         )
